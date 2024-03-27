@@ -1,12 +1,31 @@
-[gd_scene load_steps=4 format=3 uid="uid://btjc0rsbsg0tf"]
+[gd_scene load_steps=9 format=3 uid="uid://btjc0rsbsg0tf"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_en7vb"]
 [ext_resource type="PackedScene" uid="uid://pbmyh1qru7p" path="res://characters/happy_boo/happy_boo.tscn" id="1_tja2r"]
+[ext_resource type="PackedScene" uid="uid://caj326mm0n7vr" path="res://gun.tscn" id="3_rukr0"]
+[ext_resource type="Texture2D" uid="uid://bo67di3ks85ca" path="res://Lights/light.png" id="4_f48ib"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_61inc"]
 radius = 29.0
 
-[node name="CharacterBody2D" type="CharacterBody2D"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_ja6ct"]
+radius = 40.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_apg7q"]
+bg_color = Color(0.168627, 0.168627, 0.168627, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o5gxd"]
+bg_color = Color(0.396078, 0.678431, 0.411765, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_en7vb")
 
 [node name="HappyBoo" parent="." instance=ExtResource("1_tja2r")]
@@ -15,3 +34,36 @@ position = Vector2(1, -1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_61inc")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Gun" parent="." instance=ExtResource("3_rukr0")]
+position = Vector2(-1, -47)
+
+[node name="HurtBox" type="Area2D" parent="."]
+unique_name_in_owner = true
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+shape = SubResource("CircleShape2D_ja6ct")
+debug_color = Color(0.882353, 0.294118, 0.435294, 0.419608)
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+unique_name_in_owner = true
+offset_left = -67.0
+offset_top = -130.0
+offset_right = 69.0
+offset_bottom = -103.0
+theme_override_styles/background = SubResource("StyleBoxFlat_apg7q")
+theme_override_styles/fill = SubResource("StyleBoxFlat_o5gxd")
+step = 1.0
+value = 100.0
+rounded = true
+show_percentage = false
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+energy = 0.14
+shadow_enabled = true
+texture = ExtResource("4_f48ib")
+texture_scale = 3.25

@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://77hrwev3kntb"]
+
+[ext_resource type="Texture2D" uid="uid://b7rhtttevhxtj" path="res://characters/ground_shadow.png" id="1_xucwn"]
+[ext_resource type="Texture2D" uid="uid://caqfk2xng5v5u" path="res://trees/pine_tree.png" id="2_3ukxe"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7nhl2"]
+radius = 31.0644
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_y6bl5"]
+polygon = PackedVector2Array(-26, -19, -51, -15, -59, -26, -39, -63, -47, -69, -46, -76, -1, -133, 46, -73, 40, -62, 59, -25, 50, -15, 20, -17, 17, 10, -11, 10, -16, -16)
+
+[node name="PineTree" type="StaticBody2D"]
+
+[node name="GroundShadow" type="Sprite2D" parent="."]
+modulate = Color(0.737255, 0.847059, 0.941176, 1)
+scale = Vector2(0.769231, 0.769231)
+texture = ExtResource("1_xucwn")
+
+[node name="PineTree" type="Sprite2D" parent="."]
+position = Vector2(0, -63)
+texture = ExtResource("2_3ukxe")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_7nhl2")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+occluder = SubResource("OccluderPolygon2D_y6bl5")
